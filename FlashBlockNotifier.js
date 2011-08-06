@@ -12,6 +12,10 @@
  *   - Safari ClickToFlash Plugin (for Safari < 5.0.6) (http://rentzsch.github.com/clicktoflash/)
  *
  * Tested on:
+ *   - Chrome 12
+ *     - FlashBlock by Lex1 1.2.11.12
+ *     - FlashBlock by josorek 0.9.31
+ *     - FlashFree 1.1.3
  *   - Firefox 5.0.1 + Flashblock 1.5.15.1
  *   - Opera 11.5
  *   - Safari 5.1 + ClickToFlash (2.3.2)
