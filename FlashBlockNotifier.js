@@ -86,7 +86,7 @@
             },
             // Safari ClickToFlash Extension (http://hoyois.github.com/safariextensions/clicktoplugin/)
             function(swfNode) {
-                return !swfNode.parentNode.className.indexOf('CTFnodisplay') > -1;
+                return swfNode.parentNode.className.indexOf('CTFnodisplay') > -1;
             }
         ],
 
@@ -142,9 +142,10 @@
                                 for (var i = 0, j = TESTS.length; i < j; i++) {
                                     if (TESTS[i](swfElement, wrapper)) {
                                         onFailure(e);
-                                        break;
+                                        return;
                                     }
                                 }
+                                callbackFn(e);
                             }, FlashBlockNotifier.__TIMEOUT);
                         }
                     }
