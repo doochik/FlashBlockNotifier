@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>FlashBlockNotifier demo and example page</title>
+    <script src="//yandex.st/swfobject/2.2/swfobject.js"></script>
+    <script src="FlashBlockNotifier.js"></script>
+</head>
+<body>
+<div id="result"></div>
+<div id="flash_is_here"></div>
+<script>
+    FlashBlockNotifier.embedSWF(
+            'http://www.adobe.com/products/flashplayer/productinfo/features/experience/core.swf',
+            'flash_is_here',
+            1000,
+            600,
+            '9.0.0',
+            null,
+            null,
+            null,
+            null,
+            function(e) {
+                var res = '';
+                if (e.success) {
+                    res = 'no FlashBlock';
+
+                } else if (!e.success && e.__fbn) {
+                    res = 'FlashBlock detected';
+
+                } else {
+                    res = 'Flash is not installed';
+                }
+                document.getElementById('result').innerHTML = res;
+            }
+    );
+</script>
+</body>
+</html>
