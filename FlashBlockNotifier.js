@@ -29,7 +29,7 @@
  *
  * Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
  */
-(function(/**document*/document) {
+(function(/**document*/document, /**window*/window) {
 
     function remove(node) {
         node.parentNode.removeChild(node);
@@ -78,7 +78,7 @@
             if (FlashBlockNotifier.FLASH_BLOCK) {
                 callbackFn({
                     'success': false,
-                    'error': 'FlashBlock'
+                    '__fbn': true
                 });
                 return;
             }
@@ -160,7 +160,7 @@
                         }
                         FlashBlockNotifier.FLASH_BLOCK = true;
                         e.success = false;
-                        e.error = 'FlashBlock';
+                        e.__fbn = true;
                         callbackFn(e);
                     }
                 });
@@ -169,4 +169,4 @@
     };
 
     window['FlashBlockNotifier'] = FlashBlockNotifier;
-})(document);
+})(document, window);
