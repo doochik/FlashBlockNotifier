@@ -29,7 +29,7 @@
  *
  * Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
  */
-(function() {
+(function(/**document*/document) {
 
     function remove(node) {
         node.parentNode.removeChild(node);
@@ -169,4 +169,4 @@
     };
 
     window['FlashBlockNotifier'] = FlashBlockNotifier;
-});
+})(document);
