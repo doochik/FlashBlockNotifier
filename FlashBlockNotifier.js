@@ -50,20 +50,6 @@
         __SWF_WRAPPER_CLASS: 'fbn-swf-wrapper',
 
         /**
-         * Remove swf if flash block detected
-         * @public
-         * @type Boolean
-         */
-        REMOVE_BLOCKED_SWF: true,
-
-        /**
-         * Is flash block detected?
-         * @public
-         * @type Boolean
-         */
-        FLASH_BLOCK: false,
-
-        /**
          * Timeout for flash block detect
          * @default 500
          * @protected
@@ -96,7 +82,7 @@
         ],
 
         /**
-         * Embed SWF info page. This function has same options as swfobject.embedSWF
+         * Embed SWF info page. This function has same options as swfobject.embedSWF except last param removeBlockedSWF.
          * @see http://code.google.com/p/swfobject/wiki/api
          * @param swfUrlStr
          * @param replaceElemIdStr
@@ -108,19 +94,12 @@
          * @param parObj
          * @param attObj
          * @param callbackFn
+         * @param {Boolean} [removeBlockedSWF=true] Remove swf if blocked
          */
-        embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn) {
+        embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, removeBlockedSWF) {
             var swfobject = window['swfobject'];
 
             if (!swfobject) {
-                return;
-            }
-
-            if (FlashBlockNotifier.FLASH_BLOCK) {
-                callbackFn({
-                    'success': false,
-                    '__fbn': true
-                });
                 return;
             }
 
@@ -145,7 +124,7 @@
                         callbackFn(e);
 
                     } else {
-                        var swfElement = e.ref;
+                        var swfElement = e['ref'];
 
                         if (swfElement && swfElement['getSVGDocument'] && swfElement['getSVGDocument']()) {
                             // Opera 11.5 and above replaces flash with SVG button
@@ -167,7 +146,7 @@
                     }
 
                     function onFailure(e) {
-                        if (FlashBlockNotifier.REMOVE_BLOCKED_SWF) {
+                        if (removeBlockedSWF !== false) {
                             //remove swf
                             swfobject.removeSWF(replaceElemIdStr);
                             //remove wrapper
@@ -187,7 +166,6 @@
                                 remove(lastBodyChild);
                             }
                         }
-                        FlashBlockNotifier.FLASH_BLOCK = true;
                         e.success = false;
                         e.__fbn = true;
                         callbackFn(e);
