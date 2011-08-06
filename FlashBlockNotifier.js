@@ -1,4 +1,4 @@
-/**!
+/**
  * This is wrapper for swfobject that detects FlashBlock in browser.
  *
  * Wrapper detects:
@@ -94,9 +94,6 @@
             var swfobject = window['swfobject'];
 
             if (!swfobject) {
-                window['console']
-                    && console.log
-                && console.log('This script requires swfobject. http://code.google.com/p/swfobject/');
                 return;
             }
 
