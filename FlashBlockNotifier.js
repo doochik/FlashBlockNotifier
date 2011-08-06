@@ -23,20 +23,27 @@
  * Copyright 2011, Alexey Androsov
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
  *
+ * @requires swfobject
  * @author Alexey Androsov <doochik@ya.ru>
  * @version 1.0
  *
  * Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
  */
-window['FlashBlockNotifier'] = {
+(function() {
+
+    function remove(node) {
+        node.parentNode.removeChild(node);
+    }
+
+    var FlashBlockNotifier = {
 
     /**
      * CSS-class for swf wrapper.
      * @protected
-     * @default venya-swf-wrapper
+     * @default fbn-swf-wrapper
      * @type String
      */
-    __SWF_WRAPPER_CLASS: 'venya-swf-wrapper',
+    __SWF_WRAPPER_CLASS: 'fbn-swf-wrapper',
 
     /**
      * Remove swf if flash block detected
@@ -68,7 +75,7 @@ window['FlashBlockNotifier'] = {
             return;
         }
 
-        if (Venya.FLASH_BLOCK) {
+        if (FlashBlockNotifier.FLASH_BLOCK) {
             callbackFn({
                 'success': false,
                 'error': 'FlashBlock'
@@ -85,7 +92,7 @@ window['FlashBlockNotifier'] = {
             // We need to create div-wrapper because some flash block plugins replaces swf with another content
             // Also some flash requires wrapper for properly work
             var wrapper = document.createElement('div');
-            wrapper.className = Venya.__SWF_WRAPPER_CLASS;
+            wrapper.className = FlashBlockNotifier.__SWF_WRAPPER_CLASS;
 
             replaceElement.parentNode.replaceChild(wrapper, replaceElement);
             wrapper.appendChild(replaceElement);
@@ -127,31 +134,31 @@ window['FlashBlockNotifier'] = {
                                 // @see http://hoyois.github.com/safariextensions/clicktoplugin/
                                 onFailure(e, true);
                             }
-                        }, Venya.__TIMEOUT);
+                        }, FlashBlockNotifier.__TIMEOUT);
                     }
                 }
 
                 function onFailure(e, removeArtefacts) {
-                    if (removeSWF !== false && Venya.REMOVE_BLOCKED_SWF) {
+                    if (removeSWF !== false && FlashBlockNotifier.REMOVE_BLOCKED_SWF) {
                         //remove swf
                         swfobject.removeSWF(replaceElemIdStr);
                         //remove wrapper
-                        wrapper.parentNode.removeChild(wrapper);
+                        remove(wrapper);
                         if (removeArtefacts) {
                             //ClickToFlash artefacts
                             var ctf = document.getElementById('CTFstack');
                             if (ctf) {
-                                ctf.parentNode.removeChild(ctf);
+                                remove(ctf);
                             }
 
                             //Chrome FlashBlock artefact
                             var lastBodyChild = document.body.lastChild;
                             if (lastBodyChild && lastBodyChild.className == 'ujs_flashblock_placeholder') {
-                                lastBodyChild.parentNode.removeChild(lastBodyChild);
+                                remove(lastBodyChild);
                             }
                         }
                     }
-                    Venya.FLASH_BLOCK = true;
+                    FlashBlockNotifier.FLASH_BLOCK = true;
                     e.success = false;
                     e.error = 'FlashBlock';
                     callbackFn(e);
@@ -160,3 +167,6 @@ window['FlashBlockNotifier'] = {
         });
     }
 };
+
+    window['FlashBlockNotifier'] = FlashBlockNotifier;
+});
