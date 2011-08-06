@@ -80,7 +80,8 @@
             },
             // older Safari ClickToFlash (http://rentzsch.github.com/clicktoflash/)
             function(swfNode) {
-                return swfNode.type != 'application/x-shockwave-flash'
+                // IE has no swfNode.type
+                return swfNode.type && swfNode.type != 'application/x-shockwave-flash'
             },
             // FlashBlock for Firefox (https://addons.mozilla.org/ru/firefox/addon/flashblock/)
             // Chrome FlashFree (https://chrome.google.com/webstore/detail/ebmieckllmmifjjbipnppinpiohpfahm)
