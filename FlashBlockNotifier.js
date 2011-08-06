@@ -1,5 +1,5 @@
 /**
- * This is wrapper for swfobject that detects FlashBlock in browser.
+ * This is a wrapper for swfobject that detects FlashBlock in browser.
  *
  * Wrapper detects:
  *   - Chrome
@@ -20,9 +20,9 @@
  *   - Opera 11.5
  *   - Safari 5.1 + ClickToFlash (2.3.2)
  *
- * Also this wrapper can remove blocked swf and let you to downgrade to other ?????.
+ * Also this wrapper can remove blocked swf and let you downgrade to other options.
  *
- * Feel free to contact with me via email.
+ * Feel free to contact me via email.
  *
  * Copyright 2011, Alexey Androsov
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
@@ -130,8 +130,8 @@
                     return;
                 }
 
-                // We need to create div-wrapper because some flash block plugins replaces swf with another content
-                // Also some flash requires wrapper for properly work
+                // We need to create div-wrapper because some flash block plugins replace swf with another content.
+                // Also some flash requires wrapper to work properly.
                 var wrapper = document.createElement('div');
                 wrapper.className = FlashBlockNotifier.__SWF_WRAPPER_CLASS;
 
@@ -198,7 +198,7 @@
     };
 
     /**
-     * FlashBlockNotifier is the wrapper for swfobject that detects FlashBlock in browser.
+     * FlashBlockNotifier is a wrapper for swfobject that detects FlashBlock in browser.
      */
     window['FlashBlockNotifier'] = FlashBlockNotifier;
 })(document, window);
