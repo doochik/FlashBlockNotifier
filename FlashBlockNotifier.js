@@ -67,8 +67,33 @@
          */
         __TIMEOUT: 500,
 
+        __TESTS: [
+            // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie#)
+            // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/gofhjkjmkpinhpoiabjplobcaignabnl)
+            function(swfNode, wrapperNode) {
+                // we expect that swf is the only child of wrapper
+                return wrapperNode.childNodes.length > 1
+            },
+            // older Safari ClickToFlash (http://rentzsch.github.com/clicktoflash/)
+            function(swfNode) {
+                return swfNode.type != 'application/x-shockwave-flash'
+            },
+            // FlashBlock for Firefox (https://addons.mozilla.org/ru/firefox/addon/flashblock/)
+            // Chrome FlashFree (https://chrome.google.com/webstore/detail/ebmieckllmmifjjbipnppinpiohpfahm)
+            function(swfNode) {
+                // swf have been detached from DOM
+                return !swfNode.parentNode;
+            },
+            // Safari ClickToFlash Extension (http://hoyois.github.com/safariextensions/clicktoplugin/)
+            function(swfNode) {
+                return !swfNode.parentNode.className.indexOf('CTFnodisplay') > -1;
+            }
+        ],
+
         embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, removeSWF) {
-            if (!window['swfobject']) {
+            var swfobject = window['swfobject'];
+
+            if (!swfobject) {
                 window['console']
                     && console.log
                 && console.log('This script requires swfobject. http://code.google.com/p/swfobject/');
@@ -113,49 +138,36 @@
                         } else {
                             //set timeout to let FlashBlock plugin detect swf and replace it some contents
                             window.setTimeout(function() {
-                                if (wrapper.childNodes.length > 1) {
-                                    // we expect that swf is the onle child of wrapper
-                                    // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie#)
-                                    // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/gofhjkjmkpinhpoiabjplobcaignabnl)
-                                    onFailure(e, true);
-
-                                } else if (swfElement.type != 'application/x-shockwave-flash') {
-                                    // older Safari ClickToFlash (http://rentzsch.github.com/clicktoflash/)
-                                    onFailure(e);
-
-                                } else if (!swfElement.parentNode) {
-                                    // swf have been detached from DOM
-                                    // FlashBlock for Firefox (https://addons.mozilla.org/ru/firefox/addon/flashblock/)
-                                    // Chrome FlashFree (https://chrome.google.com/webstore/detail/ebmieckllmmifjjbipnppinpiohpfahm)
-                                    onFailure(e);
-
-                                } else if (swfElement.parentNode.className.indexOf('CTFnodisplay') > -1) {
-                                    // Safari ClickToFlash Extension
-                                    // @see http://hoyois.github.com/safariextensions/clicktoplugin/
-                                    onFailure(e, true);
+                                var TESTS = FlashBlockNotifier.__TESTS;
+                                for (var i = 0, j = TESTS.length; i < j; i++) {
+                                    if (TESTS[i](swfElement, wrapper)) {
+                                        onFailure(e);
+                                        break;
+                                    }
                                 }
                             }, FlashBlockNotifier.__TIMEOUT);
                         }
                     }
 
-                    function onFailure(e, removeArtefacts) {
+                    function onFailure(e) {
                         if (removeSWF !== false && FlashBlockNotifier.REMOVE_BLOCKED_SWF) {
                             //remove swf
                             swfobject.removeSWF(replaceElemIdStr);
                             //remove wrapper
                             remove(wrapper);
-                            if (removeArtefacts) {
-                                //ClickToFlash artefacts
-                                var ctf = document.getElementById('CTFstack');
-                                if (ctf) {
-                                    remove(ctf);
-                                }
 
-                                //Chrome FlashBlock artefact
-                                var lastBodyChild = document.body.lastChild;
-                                if (lastBodyChild && lastBodyChild.className == 'ujs_flashblock_placeholder') {
-                                    remove(lastBodyChild);
-                                }
+                            //remove extension artefacts
+                            
+                            //ClickToFlash artefacts
+                            var ctf = document.getElementById('CTFstack');
+                            if (ctf) {
+                                remove(ctf);
+                            }
+
+                            //Chrome FlashBlock artefact
+                            var lastBodyChild = document.body.lastChild;
+                            if (lastBodyChild && lastBodyChild.className == 'ujs_flashblock_placeholder') {
+                                remove(lastBodyChild);
                             }
                         }
                         FlashBlockNotifier.FLASH_BLOCK = true;
