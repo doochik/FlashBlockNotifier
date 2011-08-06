@@ -94,7 +94,21 @@
             }
         ],
 
-        embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, removeSWF) {
+        /**
+         * Embed SWF info page. This function has same options as swfobject.embedSWF
+         * @see http://code.google.com/p/swfobject/wiki/api
+         * @param swfUrlStr
+         * @param replaceElemIdStr
+         * @param widthStr
+         * @param heightStr
+         * @param swfVersionStr
+         * @param xiSwfUrlStr
+         * @param flashvarsObj
+         * @param parObj
+         * @param attObj
+         * @param callbackFn
+         */
+        embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn) {
             var swfobject = window['swfobject'];
 
             if (!swfobject) {
@@ -152,7 +166,7 @@
                     }
 
                     function onFailure(e) {
-                        if (removeSWF !== false && FlashBlockNotifier.REMOVE_BLOCKED_SWF) {
+                        if (FlashBlockNotifier.REMOVE_BLOCKED_SWF) {
                             //remove swf
                             swfobject.removeSWF(replaceElemIdStr);
                             //remove wrapper
@@ -182,5 +196,8 @@
         }
     };
 
+    /**
+     * FlashBlockNotifier is the wrapper for swfobject that detects FlashBlock in browser.
+     */
     window['FlashBlockNotifier'] = FlashBlockNotifier;
 })(document, window);
