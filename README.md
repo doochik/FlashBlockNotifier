@@ -1,11 +1,14 @@
 #FlashBlockNotifier
 This is a wrapper for swfobject that detects FlashBlock in browser.
-Script requires SWFObject (http://code.google.com/p/swfobject/)
+
+Script requires SWFObject (http://code.google.com/p/swfobject/).
+
 Also this wrapper can remove blocked swf and let you downgrade to other options.
 
 Feel free to contact me via email.
 
-Copyright 2011, Alexey Androsov
+© 2011, Alexey Androsov
+
 Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
 
 ##Wrapper detects:
