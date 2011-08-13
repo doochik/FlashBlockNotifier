@@ -7,11 +7,13 @@ Also this wrapper can remove blocked swf and let you downgrade to other options.
 
 Feel free to contact me via email.
 
+Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
+
 © 2011, Alexey Androsov
 
 Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
 
-##Wrapper detects:
+##FlashBlockNotifier detects:
   - Chrome
     - FlashBlock (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie)
     - FlashBlock (https://chrome.google.com/webstore/detail/gofhjkjmkpinhpoiabjplobcaignabnl)
@@ -29,5 +31,3 @@ Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
   - Firefox 5.0.1 + Flashblock 1.5.15.1
   - Opera 11.5
   - Safari 5.1 + ClickToFlash (2.3.2)
-
-Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
