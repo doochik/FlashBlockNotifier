@@ -37,6 +37,6 @@ Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
 
 Syntax is identical to [swfobject.emdebSWF](http://code.google.com/p/swfobject/wiki/api#swfobject.embedSWF(swfUrlStr,_replaceElemIdStr,_widthStr,_height).
 
-Last param "removeBlockedSWF" (default is true) says FlashBlockNotifier remove or not blocked swf object from DOM.
+Last param "removeBlockedSWF" (default is true) tells FlashBlockNotifier to remove or not to remove blocked swf object from DOM.
 
 Event object in callbackFn has new property "__fbn" which means "is swf can't load because of flashblock".
