@@ -9,32 +9,43 @@
 <body>
 <p>This is demo page for <a href="https://github.com/doochik/FlashBlockNotifier">FlashBlockNotifier</a> project.</p>
 <p>FlashBlockNotifier is a wrapper for swfobject that detects FlashBlock extensions in browsers (Chrome, Firefox, Opera, Safari).</p>
-<div id="example" style="border: 1px solid #000">
-    <div id="result"></div>
-    <div id="flash_is_here"></div>
+<p><a href="https://github.com/doochik/FlashBlockNotifier/blob/master/demo.html">This page source code</a>.</p>
+<div id="example" style="border-top: 1px solid #000">
+    <p>
+        <span id="result" style="padding: 5px;">
+            <span>Result:</span>
+            <span id="result_text"></span>
+        </span>
+    </p>
+    <div id="flash_is_here" style="width:425px;height:356px;"></div>
     <script>
         FlashBlockNotifier.embedSWF(
-                'http://www.adobe.com/products/flashplayer/productinfo/features/experience/core.swf',
+                'http://www.youtube.com/v/rctdMX_qlMw?enablejsapi=1&playerapiid=ytplayer',
                 'flash_is_here',
-                1000,
-                600,
-                '9.0.0',
+                425,
+                356,
+                '8.0.0',
                 null,
                 null,
-                null,
-                null,
+                { allowScriptAccess: "always" },
+                { id: "myytplayer" },
                 function(e) {
                     var res = '';
+                    var color = '';
                     if (e.success) {
                         res = 'no FlashBlock';
+                        color = '#BFB';
 
                     } else if (!e.success && e.__fbn) {
                         res = 'FlashBlock detected';
+                        color = '#BBF';
 
                     } else {
                         res = 'Flash is not installed';
+                        color = '#FBB';
                     }
-                    document.getElementById('result').innerHTML = res;
+                    document.getElementById('result_text').innerHTML = res;
+                    document.getElementById('result').style.background = color;
                 }
         );
     </script>
