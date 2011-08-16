@@ -9,7 +9,7 @@ Feel free to contact me via email.
 
 Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
 
-© 2011, Alexey Androsov
+© 2011, Alexey Androsov <doochik@ya.ru>
 
 Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
 
@@ -31,3 +31,12 @@ Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
   - Firefox 5.0.1 + Flashblock 1.5.15.1
   - Opera 11.5
   - Safari 5.1 + ClickToFlash (2.3.2)
+
+##API Reference:
+    FlashBlockNotifier.embedSWF(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, removeBlockedSWF)
+
+Syntax is identical to [swfobject.emdebSWF](http://code.google.com/p/swfobject/wiki/api#swfobject.embedSWF(swfUrlStr,_replaceElemIdStr,_widthStr,_height).
+
+Last param "removeBlockedSWF" (default is true) says FlashBlockNotifier remove or not blocked swf object from DOM.
+
+Event object in callbackFn has new property "__fbn" which means "is swf can't load because of flashblock".
