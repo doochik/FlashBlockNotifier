@@ -58,7 +58,7 @@
         __TIMEOUT: 500,
 
         __TESTS: [
-            // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie#)
+            // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie)
             // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/gofhjkjmkpinhpoiabjplobcaignabnl)
             function(swfNode, wrapperNode) {
                 // we expect that swf is the only child of wrapper
