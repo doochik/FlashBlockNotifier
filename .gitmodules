@@ -1,0 +1,3 @@
+[submodule "yuicompressor"]
+	path = yuicompressor
+	url = git://github.com/yui/yuicompressor.git
