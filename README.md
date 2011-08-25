@@ -39,4 +39,4 @@ Syntax is identical to [swfobject.emdebSWF](http://code.google.com/p/swfobject/w
 
 Last param "removeBlockedSWF" (default is true) tells FlashBlockNotifier to remove or not to remove blocked swf object from DOM.
 
-Event object in callbackFn has new property "__fbn" which means "is swf can't load because of flashblock".
+Event object in callbackFn has new property "__fbn" which means "swf can't load because of flashblock".
