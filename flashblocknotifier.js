@@ -124,9 +124,17 @@
                         callbackFn(e);
 
                     } else {
-                        var swfElement = e['ref'];
+                        var swfElement = e['ref'],
+                            getSVGDocument = false;
 
-                        if (swfElement && swfElement['getSVGDocument'] && swfElement['getSVGDocument']()) {
+                        try {
+                            //IE9 has this method, but crash on execute
+                            getSVGDocument = swfElement && swfElement['getSVGDocument'] && swfElement['getSVGDocument']();
+                        } catch (e) {
+                            getSVGDocument = false;
+                        }
+
+                        if (getSVGDocument) {
                             // Opera 11.5 and above replaces flash with SVG button
                             onFailure(e);
 
