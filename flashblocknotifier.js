@@ -19,6 +19,7 @@
  *   - Firefox 5.0.1 + Flashblock 1.5.15.1
  *   - Opera 11.5
  *   - Safari 5.1 + ClickToFlash (2.3.2)
+ *   - Safari 5.1 + ClickToFlash (2.6)
  *
  * Also this wrapper can remove blocked swf and let you downgrade to other options.
  *
@@ -29,17 +30,21 @@
  *
  * @requires swfobject
  * @author Alexey Androsov <doochik@ya.ru>
- * @version 1.0
+ * @version 1.0.1
  *
  * Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
  */
 (function(/**document*/document, /**window*/window) {
 
     function remove(node) {
-        node.parentNode.removeChild(node);
+        var parent = node.parentNode;
+        parent && parent.removeChild(node);
     }
 
-    var FlashBlockNotifier = {
+    /**
+     * FlashBlockNotifier is a wrapper for swfobject that detects FlashBlock in browser.
+     */
+    var FlashBlockNotifier = window['FlashBlockNotifier'] = {
 
         /**
          * CSS-class for swf wrapper.
@@ -77,8 +82,23 @@
             },
             // Safari ClickToFlash Extension (http://hoyois.github.com/safariextensions/clicktoplugin/)
             function(swfNode) {
-                return (swfNode.parentNode.className.indexOf('CTFnodisplay') > -1 ||
-						swfNode.parentNode.parentNode.parentNode.id.indexOf('CTP') > -1); //CTF Version >= 2.6
+                var parentNode = swfNode.parentNode;
+
+                if (parentNode) {
+                    if (parentNode.className.indexOf('CTFnodisplay') > -1) {
+                        return true;
+                    }
+
+                    try {
+                        // safe parentNode chain :)
+                        if (parentNode.parentNode.parentNode.id.indexOf('CTP') > -1)  {
+                            //CTF Version >= 2.6
+                            return true;
+                        }
+                    } catch (e) {}
+
+                }
+                return false;
             }
         ],
 
@@ -184,8 +204,4 @@
         }
     };
 
-    /**
-     * FlashBlockNotifier is a wrapper for swfobject that detects FlashBlock in browser.
-     */
-    window['FlashBlockNotifier'] = FlashBlockNotifier;
 })(document, window);

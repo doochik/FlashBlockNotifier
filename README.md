@@ -31,6 +31,7 @@ Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
   - Firefox 5.0.1 + Flashblock 1.5.15.1
   - Opera 11.5
   - Safari 5.1 + ClickToFlash (2.3.2)
+  - Safari 5.1 + ClickToFlash (2.6)
 
 ##API Reference:
     FlashBlockNotifier.embedSWF(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj, callbackFn, removeBlockedSWF)
