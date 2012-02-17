@@ -77,7 +77,8 @@
             },
             // Safari ClickToFlash Extension (http://hoyois.github.com/safariextensions/clicktoplugin/)
             function(swfNode) {
-                return swfNode.parentNode.className.indexOf('CTFnodisplay') > -1;
+                return (swfNode.parentNode.className.indexOf('CTFnodisplay') > -1 ||
+						swfNode.parentNode.parentNode.parentNode.id.indexOf('CTP') > -1); //CTF Version >= 2.6
             }
         ],
 
