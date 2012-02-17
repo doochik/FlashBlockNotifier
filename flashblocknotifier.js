@@ -91,11 +91,12 @@
 
                     try {
                         // safe parentNode chain :)
-                        if (parentNode.parentNode.parentNode.id.indexOf('CTP') > -1)  {
+                        if (parentNode.parentNode.parentNode.id.indexOf('CTP') > -1) {
                             //CTF Version >= 2.6
                             return true;
                         }
-                    } catch (e) {}
+                    } catch (e) {
+                    }
 
                 }
                 return false;
@@ -182,7 +183,7 @@
                             remove(wrapper);
 
                             //remove extension artefacts
-                            
+
                             //ClickToFlash artefacts
                             var ctf = document.getElementById('CTFstack');
                             if (ctf) {
