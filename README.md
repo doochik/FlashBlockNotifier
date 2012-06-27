@@ -9,7 +9,7 @@ Feel free to contact me via email.
 
 Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
 
-© 2011, Alexey Androsov <doochik@ya.ru>
+© 2011-2012, Alexey Androsov <doochik@ya.ru>
 
 Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) or GPL Version 3 (http://www.gnu.org/licenses/gpl.html) licenses.
 
