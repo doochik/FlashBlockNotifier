@@ -30,7 +30,7 @@
  *
  * @requires swfobject
  * @author Alexey Androsov <doochik@ya.ru>
- * @version 1.0.1
+ * @version 1.0.2
  *
  * Thanks to flashblockdetector project (http://code.google.com/p/flashblockdetector)
  */
