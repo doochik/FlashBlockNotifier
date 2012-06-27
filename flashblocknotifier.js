@@ -64,6 +64,7 @@
 
         __TESTS: [
             // Chrome notification "The flash plug-in was blocked because it is out of date"
+            //TODO: this test is very unstable, try to find another one
             function(swfNode) {
                 return swfNode.getAttribute('title') === 'Flash';
             },
