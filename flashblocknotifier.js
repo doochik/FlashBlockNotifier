@@ -63,6 +63,10 @@
         __TIMEOUT: 500,
 
         __TESTS: [
+            // Chrome notification "The flash plug-in was blocked because it is out of date"
+            function(swfNode) {
+                return swfNode.getAttribute('title') === 'Flash';
+            },
             // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/cdngiadmnkhgemkimkhiilgffbjijcie)
             // Chome FlashBlock extension (https://chrome.google.com/webstore/detail/gofhjkjmkpinhpoiabjplobcaignabnl)
             function(swfNode, wrapperNode) {
